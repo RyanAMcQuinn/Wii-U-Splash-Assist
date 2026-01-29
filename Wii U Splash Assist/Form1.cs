@@ -19,7 +19,7 @@ namespace Wii_U_Splash_Assist
             try
             {
                 //
-
+                checkBox1.Checked = true;
                 //
                 OpenFileDialog ImageBox = new OpenFileDialog();
                 ImageBox.Title = "Choose your image file...";
@@ -91,7 +91,9 @@ namespace Wii_U_Splash_Assist
         {
             try
             {
-
+                //
+                checkBox2.Checked = true;
+                //
                 OpenFileDialog ImageBox = new OpenFileDialog();
                 ImageBox.Title = "Choose your sound file...";
                 ImageBox.Filter = "48khz Wav file (*.wav)|*.wav|All Files (*.*)|*.*";
@@ -177,44 +179,60 @@ namespace Wii_U_Splash_Assist
         {
             try
             {
-                //Put tempimg.z into byte array calculate size + check if too big (151066 bytes max)
-                FileToByteArray("tempimg.z");
-                if (fileData.Length > 151050)
+                if(textBox3.Text == "")
                 {
-                    MessageBox.Show("Image file too large, Using only 16 unique colors is strongly recommended!");
+                    MessageBox.Show("Where's your root.rpx file?", "Nothing selected.", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                else
+                if(checkBox1.Checked == false && checkBox2.Checked == false)
                 {
-                    //copy zlib files via byte array into root.drpx with padding (FF FF 00 00)
-                    FileStream streamI = File.Open("root.drpx", FileMode.Open, FileAccess.ReadWrite);
-                    streamI.Seek(0x176BA0, SeekOrigin.Begin);
-                    streamI.Write(fileData);
-                    streamI.WriteByte(0xFF);
-                    streamI.WriteByte(0xFF);
-                    streamI.WriteByte(0x00);
-                    streamI.WriteByte(0x00);
-                    streamI.Close();
-                }
-                //Put tempsnd.z into byte array calculate size + check if too big (1529603 bytes max)
-                FileToByteArray("tempsnd.z");
-                if (fileData.Length > 1529590)
-                {
-                    MessageBox.Show("Sound file too large, keep it 8 seconds or less!");
+                    MessageBox.Show("Theres nothing selected. Pick either an image or sound to insert into root.rpx.","Nothing selected.",MessageBoxButtons.OK,MessageBoxIcon.Error);
                     return;
                 }
-                else
-                {
-                    //copy zlib files via byte array into root.drpx with padding (FF FF 00 00)
-                    FileStream streamS = File.Open("root.drpx", FileMode.Open, FileAccess.ReadWrite);
-                    streamS.Seek(0x514, SeekOrigin.Begin);
-                    streamS.Write(fileData);
-                    streamS.WriteByte(0xFF);
-                    streamS.WriteByte(0xFF);
-                    streamS.WriteByte(0x00);
-                    streamS.WriteByte(0x00);
-                    streamS.Close();
+                if (checkBox1.Checked){
+                    //Put tempimg.z into byte array calculate size + check if too big (151066 bytes max)
+                    FileToByteArray("tempimg.z");
+                    if (fileData.Length > 151050)
+                    {
+                        MessageBox.Show("Image file too large, Using only 16 unique colors is strongly recommended!");
+                        return;
+                    }
+                    else
+                    {
+                        //copy zlib files via byte array into root.drpx with padding (FF FF 00 00)
+                        FileStream streamI = File.Open("root.drpx", FileMode.Open, FileAccess.ReadWrite);
+                        streamI.Seek(0x176BA0, SeekOrigin.Begin);
+                        streamI.Write(fileData);
+                        streamI.WriteByte(0xFF);
+                        streamI.WriteByte(0xFF);
+                        streamI.WriteByte(0x00);
+                        streamI.WriteByte(0x00);
+                        streamI.Close();
+                    }
                 }
+                if (checkBox2.Checked)
+                {
+                    //Put tempsnd.z into byte array calculate size + check if too big (1529603 bytes max)
+                    FileToByteArray("tempsnd.z");
+                    if (fileData.Length > 1529590 && checkBox2.Checked)
+                    {
+                        MessageBox.Show("Sound file too large, keep it 8 seconds or less!");
+                        return;
+                    }
+                    else
+                    {
+                        //copy zlib files via byte array into root.drpx with padding (FF FF 00 00)
+                        FileStream streamS = File.Open("root.drpx", FileMode.Open, FileAccess.ReadWrite);
+                        streamS.Seek(0x514, SeekOrigin.Begin);
+                        streamS.Write(fileData);
+                        streamS.WriteByte(0xFF);
+                        streamS.WriteByte(0xFF);
+                        streamS.WriteByte(0x00);
+                        streamS.WriteByte(0x00);
+                        streamS.Close();
+                    }
+                }
+                
 
 
                 //Repack root.dprx into root.rpx with "wiiurpxtool.exe -c root.drpx root.rpx"
