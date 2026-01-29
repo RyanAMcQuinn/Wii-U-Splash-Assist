@@ -30,19 +30,19 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             groupBox1 = new GroupBox();
+            checkBox1 = new CheckBox();
             button3 = new Button();
             textBox3 = new TextBox();
             label3 = new Label();
             button2 = new Button();
             textBox2 = new TextBox();
-            label2 = new Label();
             button1 = new Button();
             textBox1 = new TextBox();
-            label1 = new Label();
             pictureBox1 = new PictureBox();
             axWindowsMediaPlayer1 = new AxWMPLib.AxWindowsMediaPlayer();
             button4 = new Button();
             groupBox2 = new GroupBox();
+            checkBox2 = new CheckBox();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)axWindowsMediaPlayer1).BeginInit();
@@ -51,20 +51,30 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(checkBox2);
+            groupBox1.Controls.Add(checkBox1);
             groupBox1.Controls.Add(button3);
             groupBox1.Controls.Add(textBox3);
             groupBox1.Controls.Add(label3);
             groupBox1.Controls.Add(button2);
             groupBox1.Controls.Add(textBox2);
-            groupBox1.Controls.Add(label2);
             groupBox1.Controls.Add(button1);
             groupBox1.Controls.Add(textBox1);
-            groupBox1.Controls.Add(label1);
             groupBox1.Location = new Point(12, 12);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(329, 198);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
+            // 
+            // checkBox1
+            // 
+            checkBox1.AutoSize = true;
+            checkBox1.Location = new Point(22, 15);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new Size(211, 19);
+            checkBox1.TabIndex = 8;
+            checkBox1.Text = "Image File (Use included Template)";
+            checkBox1.UseVisualStyleBackColor = true;
             // 
             // button3
             // 
@@ -109,15 +119,6 @@
             textBox2.Size = new Size(207, 23);
             textBox2.TabIndex = 1;
             // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(22, 75);
-            label2.Name = "label2";
-            label2.Size = new Size(186, 15);
-            label2.TabIndex = 3;
-            label2.Text = "Sound File (Wav - 48KHZ - Stereo)";
-            // 
             // button1
             // 
             button1.Location = new Point(235, 40);
@@ -134,15 +135,6 @@
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(207, 23);
             textBox1.TabIndex = 1;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(22, 22);
-            label1.Name = "label1";
-            label1.Size = new Size(273, 15);
-            label1.TabIndex = 0;
-            label1.Text = "Image File (TGA - Top, Left - No RLE Compression)";
             // 
             // pictureBox1
             // 
@@ -180,6 +172,16 @@
             groupBox2.TabIndex = 4;
             groupBox2.TabStop = false;
             // 
+            // checkBox2
+            // 
+            checkBox2.AutoSize = true;
+            checkBox2.Location = new Point(22, 69);
+            checkBox2.Name = "checkBox2";
+            checkBox2.Size = new Size(205, 19);
+            checkBox2.TabIndex = 9;
+            checkBox2.Text = "Sound File (Wav - 48KHZ - Stereo)";
+            checkBox2.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -211,13 +213,13 @@
         private Label label3;
         private Button button2;
         private TextBox textBox2;
-        private Label label2;
         private Button button1;
         private TextBox textBox1;
-        private Label label1;
         private PictureBox pictureBox1;
         private AxWMPLib.AxWindowsMediaPlayer axWindowsMediaPlayer1;
         private Button button4;
         private GroupBox groupBox2;
+        private CheckBox checkBox1;
+        private CheckBox checkBox2;
     }
 }
